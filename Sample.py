@@ -47,9 +47,10 @@ def readingCards(signature):
 		id, time = reader.read()
 		status.blue_off()
 		if (validate.card(id, signature)):
-			accessGranted()
+			#accessGranted()
+			print "Granted"
 		else:
-			accessDenied()
+			print "Not granted"
 
 # Load or create signature
 if os.path.isfile('signature'):
