@@ -110,7 +110,7 @@ class MFRC522:
   
   def __init__(self, dev='/dev/spidev0.0', spd=1000000):
     spi.openSPI(device=dev,speed=spd)
-    GPIO.setmode(GPIO.BOARD)
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(self.NRSTPD, GPIO.OUT)
     GPIO.output(self.NRSTPD, 1)
     self.MFRC522_Init()
@@ -339,7 +339,7 @@ class MFRC522:
     (status, backData, backLen) = self.MFRC522_ToCard(self.PCD_TRANSCEIVE, recvData)
     if not(status == self.MI_OK):
       #print "Error while reading!"
-    i = 0
+      i = 0
     if len(backData) == 16:
       return backData
     else:
