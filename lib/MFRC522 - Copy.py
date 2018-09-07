@@ -110,8 +110,8 @@ class MFRC522:
   
   def __init__(self, dev='/dev/spidev0.0', spd=1000000):
     spi.openSPI(device=dev,speed=spd)
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(self.NRSTPD, GPIO.OUT)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(25, GPIO.OUT)
     GPIO.output(self.NRSTPD, 1)
     self.MFRC522_Init()
   
@@ -319,9 +319,9 @@ class MFRC522:
 
     # Check if an error occurred
     if not(status == self.MI_OK):
-      print "AUTH ERROR!!"
+      print("AUTH ERROR!!")
     if not (self.Read_MFRC522(self.Status2Reg) & 0x08) != 0:
-      print "AUTH ERROR(status2reg & 0x08) != 0"
+      print("AUTH ERROR(status2reg & 0x08) != 0")
 
     # Return the status
     return status
@@ -338,7 +338,7 @@ class MFRC522:
     recvData.append(pOut[1])
     (status, backData, backLen) = self.MFRC522_ToCard(self.PCD_TRANSCEIVE, recvData)
     if not(status == self.MI_OK):
-      #print "Error while reading!"
+      print("Error while reading!")
     i = 0
     if len(backData) == 16:
       return backData
@@ -356,7 +356,7 @@ class MFRC522:
     if not(status == self.MI_OK) or not(backLen == 4) or not((backData[0] & 0x0F) == 0x0A):
         status = self.MI_ERR
     
-    #print "%s backdata &0x0F == 0x0A %s" % (backLen, backData[0]&0x0F)
+    #print str(backLen)+" backdata &0x0F == 0x0A "+str(backData[0]&0x0F)
     if status == self.MI_OK:
         i = 0
         buf = []
@@ -368,9 +368,9 @@ class MFRC522:
         buf.append(crc[1])
         (status, backData, backLen) = self.MFRC522_ToCard(self.PCD_TRANSCEIVE,buf)
         if not(status == self.MI_OK) or not(backLen == 4) or not((backData[0] & 0x0F) == 0x0A):
-            print "Error while writing"
-        #if status == self.MI_OK:
-        #    print "Data written"
+            print("Error while writing")
+        # if status == self.MI_OK:
+        #     print "Data written"
 
   def MFRC522_DumpClassic1K(self, key, uid):
     i = 0
@@ -380,7 +380,7 @@ class MFRC522:
         if status == self.MI_OK:
             self.MFRC522_Read(i)
         else:
-            print "Authentication error"
+            print("Authentication error")
         i = i+1
 
   def MFRC522_Init(self):

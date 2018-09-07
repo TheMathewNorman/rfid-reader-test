@@ -1,5 +1,3 @@
-# Code by Simon Monk https://github.com/simonmonk/
-
 import MFRC522
 import RPi.GPIO as GPIO
   
@@ -86,3 +84,4 @@ class SimpleMFRC522:
       for i in range(0, 5):
           n = n * 256 + uid[i]
       return n
+          
