@@ -5,13 +5,15 @@
 '  Simulates a card validation
 '''
 
-# Example list of valid card IDs
-validCards = [17988527649, 595116637326, 252747632322]
+import requests
 
 class Validate:
 
-	def card(self, id):
-		if id in validCards:
-			return True
-		else:
-			return False
+	def card(self, id, signature):
+		response = False
+		r = requests.get("http://therfid.men/php/reader/approve.php?reader=" + signature)
+		if (r.text == "1"):
+			r = requests.get("http://therfid.men/php/reader/authenticate.php?reader=" + signature + "&key=" + id)
+			if (r.text == "1"):
+				resonse = True
+		return response

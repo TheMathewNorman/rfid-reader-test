@@ -8,6 +8,9 @@
 '''
 
 # Import libraries.
+import requests
+import uuid
+import os
 from gpiozero import Buzzer # Import library for buzzer.
 from time import sleep # Import library for sleep.
 import RPi.GPIO as GPIO # Import library for GPIO pins.
@@ -36,15 +39,32 @@ def accessDenied():
 	sleep(10)
 	status.red_off()
 	
-
 # Read card reader input
-while True:
-    print("Ready to read...")
-    status.blue_on()
-    id, time = reader.read()
-    status.blue_off()
-    if (validate.card(id)):
-        accessGranted()
-    else:
-        accessDenied()
+def readingCards(signature):
+	while True:
+		print("Ready to read...")
+		status.blue_on()
+		id, time = reader.read()
+		status.blue_off()
+		if (validate.card(id)):
+            accessGranted()
+		else:
+			accessDenied()
+
+# Load or create signature
+if os.path.isfile('signature'):
+	f = open("signature", "r")
+	signature = f.read()
+	f.close()
+	readingCards(signature)
+else:
+	writesignature = str(uuid.uuid4())
+	print(writesignature)
+	f = open("signature","w")
+	f.write(writesignature)
+	f.close()
+	f = open("signature", "r")
+	signature = f.read()
+	f.close()
+	readingCards(signature)
 	

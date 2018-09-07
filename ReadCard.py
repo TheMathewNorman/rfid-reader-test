@@ -14,27 +14,27 @@ import RPi.GPIO as GPIO # Import library for GPIO pins.
 
 # Import local libraries.
 from lib import SimpleMFRC522 # Import library for MFRC522.
-#from lib import RFIDStatus # Import custom library for RFID status.
-#from lib import Validate # Import custom library for user validation library.
+from lib import RFIDStatus # Import custom library for RFID status.
+from lib import Validate # Import custom library for user validation library.
 
 reader = SimpleMFRC522.SimpleMFRC522()
-#status = RFIDStatus.RFIDStatus()
-#validate = Validate.Validate()
+status = RFIDStatus.RFIDStatus()
+validate = Validate.Validate()
 
-# def accessGranted():
-# 	status.green_on()
-# 	status.quick_buzz()
-# 	sleep(10)
-# 	status.green_off()
+def accessGranted():
+	status.green_on()
+	status.quick_buzz()
+	sleep(10)
+	status.green_off()
 	
 	
-# def accessDenied():
-# 	status.red_on()
-# 	status.quick_buzz()
-# 	status.quick_buzz()
-# 	status.quick_buzz()
-# 	sleep(10)
-# 	status.red_off()
+def accessDenied():
+	status.red_on()
+	status.quick_buzz()
+	status.quick_buzz()
+	status.quick_buzz()
+	sleep(10)
+	status.red_off()
 	
 
 # Read card reader input
