@@ -47,7 +47,7 @@ def readingCards(signature):
 		id, time = reader.read()
 		status.blue_off()
 		if (validate.card(id)):
-            accessGranted()
+			accessGranted()
 		else:
 			accessDenied()
 
