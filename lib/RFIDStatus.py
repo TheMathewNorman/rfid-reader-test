@@ -15,11 +15,11 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 # Define pins for LEDs and Buzzer
-redLED = 21
-greenLED = 16
-blueLED = 20
+redLED = 2
+greenLED = 3
+blueLED = 4
 
-buzzer = 17
+buzzer = 21
 
 # Setup GPIO pins for the buzzer, status, fail, and success LEDs
 GPIO.setup(buzzer, GPIO.OUT) # Buzzer
@@ -97,5 +97,6 @@ class RFIDStatus:
 		GPIO.output(buzzer,GPIO.HIGH)
 		sleep(0.1)
 		GPIO.output(buzzer,GPIO.LOW)
+		sleep(0.1)
 		
 	

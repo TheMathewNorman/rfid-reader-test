@@ -13,7 +13,7 @@ class Validate:
 		response = False
 		r = requests.get("http://therfid.men/php/reader/approve.php?reader=" + signature)
 		if (r.text == "1"):
-			r = requests.get("http://therfid.men/php/reader/authenticate.php?reader=" + signature + "&key=" + id)
-			if (r.text == "1"):
-				resonse = True
+                        a = requests.get("http://therfid.men/php/reader/authenticate.php?reader=" + signature + "&key=" + str(id))
+                        if (a.text == "1"):
+                                response = True
 		return response
